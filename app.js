@@ -1,4 +1,4 @@
-require("dotenv").config() //active le .env
+// require("dotenv").config() //active le .env
 require("./config/mongo"); //ramene le fichier moongo
 // require("jsonwebtoken");
 const cors = require('cors') //permet de gerer la permision des  route du serveur 
