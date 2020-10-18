@@ -19,7 +19,7 @@ router.get('/animateur/:id', async (req, res, next) => {
   // console.log(allCongers)
   
   const congers = allCongers.filter(conger => req.params.id == conger.id_user._id);
-  // console.log(congers);
+  // console.log(congers);//return
   res.json(congers);
   
 });
@@ -55,10 +55,11 @@ router.post('/send/:id_user', async function(req, res, next) {// async cette fon
 
   const congerPoster = await CongerModel.create({
     id_user : req.params.id_user,
-    debut:conger.debut,
+    debut:conger.debut, //cree
     fin:conger.fin,
   }) // Je recupere l'id de l'user qui a été mis dans l'url. Moongoose met à jour les donnée (grace à findByIdAndUpdate) qui viennent du formulaire (req.body) dans l'user 
   res.json({congerdebut : congerPoster.debut, congerfin:congerPoster.fin });
+  //envoyre
 });
 
 
@@ -76,10 +77,12 @@ router.post('/conger', function(req, res, next) {
 
 //suprimer par id
 
-router.delete("/conger:id", async (req, res, next) => {
+router.delete("/conger/:id", async (req, res, next) => {
   try {
-    res.json(await CongerModel.findByIdAndDelete(req.params.id));
+    res.json(await CongerModel.deleteMany({id_user:req.params.id}))
+    
   } catch (err) {
+    console.log(err)
     next(err);
   }
 
@@ -92,7 +95,7 @@ router.delete("/conger:id", async (req, res, next) => {
 router.get("/conger/:id", async (req, res, next) => {
   try {
     res.json(await CongerModel.findById(req.params.id));
- 
+    
   } catch (err) {
     next(err);
   }

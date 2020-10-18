@@ -7,9 +7,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session')
-var mongoose = require('mongoose')
-const MongoStore = require("connect-mongo")(session)
+// var session = require('express-session')
+// var mongoose = require('mongoose')
+// const MongoStore = require("connect-mongo")(session)
 var indexRouter = require('./routes/index');
 var congerRouter = require('./routes/conger');
 
@@ -27,20 +27,20 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    cookie: {
-      maxAge: 60000
-    }, // in millisec
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection, // a demander a guillaume
-      ttl: 24 * 60 * 60, // 1 day
-    }),
-    saveUninitialized: true,
-    resave: false,
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     cookie: {
+//       maxAge: 60000
+//     }, // in millisec
+//     store: new MongoStore({
+//       mongooseConnection: mongoose.connection, // a demander a guillaume
+//       ttl: 24 * 60 * 60, // 1 day
+//     }),
+//     saveUninitialized: true,
+//     resave: false,
+//   })
+// );
 
 app.use('/', indexRouter);
 app.use('/conger', congerRouter);

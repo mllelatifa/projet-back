@@ -22,13 +22,17 @@ const userSchema = new Schema({
   }, //pour pas s'incrire avec la meme adresse mail
   motdepasse: {
     type: String,
-    required: true
+    min:4,
+    required: true,
+    
+  
   },
   tel: {
     type: Number,
     required: true
   },
   datedenaissance: {
+    
     type: String,
     required: true
   },
